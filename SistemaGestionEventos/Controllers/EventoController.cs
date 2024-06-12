@@ -65,7 +65,8 @@ namespace SistemaGestionEventos.Controllers
             {
                 _context.Add(evento);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "EventoPersonal", new { idEvento = evento.IdEvento });
             }
             ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", evento.IdCliente);
             ViewData["IdLugar"] = new SelectList(_context.Lugares, "IdLugar", "IdLugar", evento.IdLugar);

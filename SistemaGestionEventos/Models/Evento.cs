@@ -27,6 +27,7 @@ namespace SistemaGestionEventos.Models
         
 
         [ForeignKey("Cliente")]
+        [Display(Name = "Nombre cliente")]
         public int IdCliente { get; set; }
         public virtual Cliente Cliente { get; set; }
 
