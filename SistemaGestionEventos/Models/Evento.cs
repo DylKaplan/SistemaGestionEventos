@@ -9,14 +9,19 @@ namespace SistemaGestionEventos.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdEvento { get; set; }
+
+        [Required(ErrorMessage = "La descripción es obligatoria.")]
         public string Descripcion { get; set; }
 
         [ForeignKey("Lugar")]
         [Display(Name = "Nombre lugar")]
+        /*[Required(ErrorMessage = "El lugar es obligatorio.")]*/
         public int IdLugar { get; set; }
         public virtual Lugar Lugar { get; set; }
 
         public string Equipamiento { get; set; }
+        [Display(Name = "Presupuesto ($)")]
+        [Range(0, double.MaxValue, ErrorMessage = "El presupuesto debe ser un valor positivo.")]
         public int Presupuesto { get; set; }
         [Display(Name = "Fecha inicio")]
         public DateTime FechaInicio { get; set; }
