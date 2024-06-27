@@ -27,7 +27,7 @@ namespace SistemaGestionEventos.Controllers
         }
 
         // GET: EventoPersonal/Details/5
-        public async Task<IActionResult> Details(int? id)
+        /*public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -44,10 +44,10 @@ namespace SistemaGestionEventos.Controllers
             }
 
             return View(eventoPersonal);
-        }
+        }*/
 
         // GET: EventoPersonal/Create
-        /*public IActionResult Create()
+       /* public IActionResult Create()
         {
             ViewData["IdEvento"] = new SelectList(_context.Eventos, "IdEvento", "IdEvento");
             ViewData["IdPersonal"] = new SelectList(_context.Personal, "IdPersonal", "IdPersonal");
@@ -80,11 +80,13 @@ namespace SistemaGestionEventos.Controllers
             return View(eventoPersonal);
         }*/
 
+        /*ESTO ANDA OK
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdEventoPersonal,IdEvento,IdPersonal")] EventoPersonal eventoPersonal)
         {
-            if (ModelState.IsValid)
+          
+            if (eventoPersonal.IdEvento > -1 )
             {
                 _context.Add(eventoPersonal);
                 await _context.SaveChangesAsync();
@@ -103,7 +105,118 @@ namespace SistemaGestionEventos.Controllers
             ViewBag.IdEvento = eventoPersonal.IdEvento;
             ViewBag.IdPersonal = new SelectList(_context.Personal, "IdPersonal", "Nombre", eventoPersonal.IdPersonal);
             return View(eventoPersonal);
+        }*/
+
+        /*esto tambien anda ok
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("IdEventoPersonal,IdEvento,IdPersonal")] EventoPersonal eventoPersonal)
+        {
+
+            if (eventoPersonal.IdEvento > -1)
+            {
+                _context.Add(eventoPersonal);
+                await _context.SaveChangesAsync();
+
+                // Obtener el evento y el lugar asociado
+                var evento = await _context.Eventos
+                    .Include(e => e.Lugar)
+                    .FirstOrDefaultAsync(e => e.IdEvento == eventoPersonal.IdEvento);
+
+                if (evento != null)
+                {
+                    // Verificar si el lugar asociado tiene escaleras
+                    bool lugarTieneEscaleras = evento.Lugar != null && evento.Lugar.tieneEscaleras;
+
+                    // Determinar el mínimo número de personal requerido
+                    int minPersonalRequired = lugarTieneEscaleras ? 3 : 0;
+
+                    // Contar los registros de personal asociados al evento
+                    int personalCount = _context.EventoPersonal.Count(ep => ep.IdEvento == eventoPersonal.IdEvento);
+
+                    // Si no se cumple el requisito mínimo de personal, mostrar mensaje de error y volver a la vista Create
+                    if (personalCount < minPersonalRequired)
+                    {
+                        ViewBag.ErrorMessage = $"Debe asignar al menos {minPersonalRequired} registros de personal.";
+                        ViewBag.IdEvento = eventoPersonal.IdEvento;
+                        ViewBag.IdPersonal = new SelectList(_context.Personal, "IdPersonal", "Nombre");
+                        return View(eventoPersonal);
+                    }
+                }
+
+                // Redirigir al índice de Evento si se cumple con los requisitos
+                return RedirectToAction("Index", "Evento");
+            }
+
+            // Si el modelo no es válido, volver a la vista Create con los datos necesarios
+            ViewBag.IdEvento = eventoPersonal.IdEvento;
+            ViewBag.IdPersonal = new SelectList(_context.Personal, "IdPersonal", "Nombre", eventoPersonal.IdPersonal);
+            return View(eventoPersonal);
+        }*/
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("IdEventoPersonal,IdEvento,IdPersonal")] EventoPersonal eventoPersonal)
+        {
+            if (eventoPersonal.IdEvento > -1)
+            {
+                _context.Add(eventoPersonal);
+                await _context.SaveChangesAsync();
+
+                var evento = await _context.Eventos
+                    .Include(e => e.Lugar)
+                    .FirstOrDefaultAsync(e => e.IdEvento == eventoPersonal.IdEvento);
+
+                if (evento != null)
+                {
+                    // Verifico si el lugar asociado tiene escaleras
+                    bool lugarTieneEscaleras = evento.Lugar != null && evento.Lugar.tieneEscaleras;
+
+                    // Cuento los registros de personal asociados al evento
+                    int personalCount = _context.EventoPersonal.Count(ep => ep.IdEvento == eventoPersonal.IdEvento);
+
+                    // Determinar el mínimo número de personal requerido
+                    int minPersonalRequired = lugarTieneEscaleras ? 3 : 0;
+
+                    // Si el lugar tiene escaleras y el número de personal es menor que el mínimo requerido, muestro mensaje de error
+                    if (lugarTieneEscaleras && personalCount < minPersonalRequired)
+                    {
+                        ViewBag.ErrorMessage = $"Debe asignar al menos {minPersonalRequired} registros de personal para un lugar con escaleras.";
+                        ViewBag.DisableBackButton = true; // Botón deshabilitado mientras no se cumpla el requisito
+                    }
+                    else
+                    {
+                        // Permito la redirección y habilito el botón
+                        ViewBag.DisableBackButton = false;
+                    }
+                }
+                else
+                {
+                    ViewBag.DisableBackButton = true;
+                }
+
+                // Preparo los datos para la vista Create nuevamente
+                ViewBag.IdEvento = eventoPersonal.IdEvento;
+                ViewBag.IdPersonal = new SelectList(_context.Personal, "IdPersonal", "Nombre");
+                return View(eventoPersonal);
+            }
+
+            // Si el modelo no es válido, volver a la vista Create con los datos necesarios
+            ViewBag.IdEvento = eventoPersonal.IdEvento;
+            ViewBag.IdPersonal = new SelectList(_context.Personal, "IdPersonal", "Nombre", eventoPersonal.IdPersonal);
+            ViewBag.DisableBackButton = true; // Asegurar que el botón esté deshabilitado si hay un error en el modelo
+            return View(eventoPersonal);
         }
+
+
+
+
+
+
+
+
+
+
 
 
         // GET: EventoPersonal/Edit/5

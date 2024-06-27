@@ -28,11 +28,24 @@
                 @ViewBag.ErrorMessage
             </div>
         }
+        @if (ViewBag.SuccessMessage != null)
+        {
+            <div class="alert alert-success" role="alert">
+                @ViewBag.SuccessMessage
+            </div>
+        }
     </div>
 </div>
 
 <div>
-    <a asp-action="Index" asp-controller="Evento">Back to List</a>
+    @if (ViewBag.DisableBackButton == true)
+    {
+        <a class="btn btn-secondary disabled">Volver al índice de Evento</a>
+    }
+    else
+    {
+        <a asp-action="Index" asp-controller="Evento" class="btn btn-secondary">Volver al índice de Evento</a>
+    }
 </div>
 
 @section Scripts {

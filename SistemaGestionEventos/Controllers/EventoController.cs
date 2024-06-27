@@ -61,7 +61,8 @@ namespace SistemaGestionEventos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdEvento,Descripcion,IdLugar,Equipamiento,Presupuesto,FechaInicio,FechaFin,IdCliente,Estado")] Evento evento)
         {
-            if (ModelState.IsValid)
+            /*if (ModelState.IsValid)*/
+            if (evento != null)
             {
                 _context.Add(evento);
                 await _context.SaveChangesAsync();

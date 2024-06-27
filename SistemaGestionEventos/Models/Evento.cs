@@ -29,7 +29,8 @@ namespace SistemaGestionEventos.Models
         [Display(Name = "Fecha fin")]
         public DateTime FechaFin { get; set; }
 
-        
+        /*fecha fin tiene que ser mayor a fecha inicio. y ambas tienen que ser mayor a hoy. sino sale mensaje error
+         (esto se hace en vista create de Evento, y si anda ok en la vista edit*/
 
         [ForeignKey("Cliente")]
         [Display(Name = "Nombre cliente")]
