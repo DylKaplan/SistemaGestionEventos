@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SistemaGestionEventos.Models.EventoPersonal>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Listado";
 }
 
-<h1>Index</h1>
+<h1>Lista de Personal en Eventos</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="CreateForEvent">Cargar Personal a un Evento</a>
 </p>
 <table class="table">
     <thead>
@@ -22,20 +22,20 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Evento.IdEvento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Personal.IdPersonal)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdEventoPersonal">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdEventoPersonal">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdEventoPersonal">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Evento.Descripcion)
+                </td>
+                <td>
+                    @item.Personal.Nombre @item.Personal.Apellido
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.IdEventoPersonal">Detalle</a> |
+                    <a asp-action="Delete" asp-route-id="@item.IdEventoPersonal">Eliminar</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -12,10 +12,12 @@ namespace SistemaGestionEventos.Models
         public int IdEventoPersonal { get; set; }
 
         [ForeignKey("Evento")]
+        [Display(Name = "Evento")]
         public int IdEvento { get; set; }
         public virtual Evento Evento { get; set; }
 
         [ForeignKey("Personal")]
+        [Display(Name = "Personal")]
         public int IdPersonal { get; set; }
         public virtual Personal Personal { get; set; }
     }

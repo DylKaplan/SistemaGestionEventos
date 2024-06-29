@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<SistemaGestionEventos.Models.Lugar>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Listado";
 }
 
-<h1>Index</h1>
+<h1>Lista de Lugares</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear Lugar</a>
 </p>
 <table class="table">
     <thead>
@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.tieneEscaleras)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.IdLugar">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdLugar">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdLugar">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.IdLugar">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.IdLugar">Detalle</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdLugar">Eliminar</a>
             </td>
         </tr>
 }

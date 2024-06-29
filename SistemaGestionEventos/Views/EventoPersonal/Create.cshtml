@@ -1,55 +1,55 @@
 ﻿@model SistemaGestionEventos.Models.EventoPersonal
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear";
 }
 
-<h1>Create</h1>
-
-<h4>EventoPersonal</h4>
+<h1>Cargar Personal para el Evento</h1>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdEvento" value="@ViewBag.IdEvento" />
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-warning" role="alert">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
             <div class="form-group">
                 <label asp-for="IdPersonal" class="control-label"></label>
                 <select asp-for="IdPersonal" class="form-control" asp-items="ViewBag.IdPersonal"></select>
                 <span asp-validation-for="IdPersonal" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Cargar" class="btn btn-primary" />
             </div>
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
         </form>
-        @if (ViewBag.ErrorMessage != null)
-        {
-            <div class="alert alert-danger" role="alert">
-                @ViewBag.ErrorMessage
-            </div>
-        }
-        @if (ViewBag.SuccessMessage != null)
-        {
-            <div class="alert alert-success" role="alert">
-                @ViewBag.SuccessMessage
-            </div>
-        }
     </div>
 </div>
 
 <div>
-    @if (ViewBag.DisableBackButton == true)
-    {
-        <a class="btn btn-secondary disabled">Volver al índice de Evento</a>
-    }
-    else
-    {
-        <a asp-action="Index" asp-controller="Evento" class="btn btn-secondary">Volver al índice de Evento</a>
-    }
+    <a id="backButton" asp-action="Index" asp-controller="Evento" class="btn btn-secondary disabled">Volver a la Lista de Eventos</a>
 </div>
 
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var disableBackButton = '@(ViewBag.DisableBackButton ? "true" : "false")';
+
+            if (disableBackButton === "false") {
+                document.getElementById('backButton').classList.remove('disabled');
+            }
+        });
+    </script>
 }

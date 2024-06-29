@@ -1,13 +1,12 @@
 ﻿@model SistemaGestionEventos.Models.Evento
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalle";
 }
 
-<h1>Details</h1>
+<h1>Detalle del Evento</h1>
 
 <div>
-    <h4>Evento</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -20,7 +19,7 @@
             @Html.DisplayNameFor(model => model.Lugar)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Lugar.IdLugar)
+            @Html.DisplayFor(model => model.Lugar.Nombre)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Equipamiento)
@@ -50,7 +49,7 @@
             @Html.DisplayNameFor(model => model.Cliente)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Cliente.IdCliente)
+            @Html.DisplayFor(model => model.Cliente.Nombre)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Estado)
@@ -61,6 +60,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdEvento">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.IdEvento">Editar</a> |
+    <a asp-action="Index">Volver</a>
 </div>

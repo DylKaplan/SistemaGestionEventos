@@ -18,5 +18,25 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #ddd;
+}
+
+.div-home {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    align-items: center;
+}
+
+img {
+    width: fit-content;
+}
+
+.container {
+    text-align: center;
+}
+
+.footer {
+    background-color: #fff;
 }
