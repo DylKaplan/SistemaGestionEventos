@@ -9,24 +9,28 @@
 <h3>Está seguro que quiere eliminar a la persona del evento?</h3>
 <div>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Evento)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Evento.Descripcion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Personal)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Personal.Nombre)
-        </dd>
+    <dl class="row details">
+        <div class="item-detalle">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Evento)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Evento.Descripcion)
+            </dd>
+        </div>
+        <div class="item-detalle">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Personal)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Personal.Nombre)
+            </dd>
+        </div>
     </dl>
     
-    <form asp-action="Delete">
+    <form class="btn-detail" asp-action="Delete">
         <input type="hidden" asp-for="IdEventoPersonal" />
-        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" />
+        <a class="btn btn-secondary" asp-action="Index">Volver</a>
     </form>
 </div>

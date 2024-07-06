@@ -4,44 +4,45 @@
     ViewData["Title"] = "Listado";
 }
 
-<h1>Lista de Lugares</h1>
-
-<p>
-    <a asp-action="Create">Crear Lugar</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Direccion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tieneEscaleras)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Direccion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tieneEscaleras)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdLugar">Editar</a> |
-                <a asp-action="Details" asp-route-id="@item.IdLugar">Detalle</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdLugar">Eliminar</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="div-index">
+    <h1>Lista de Lugares</h1>
+    <p>
+        <a class="link-table" asp-action="Create">Crear Lugar</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Direccion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.tieneEscaleras)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Direccion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tieneEscaleras)
+                    </td>
+                    <td>
+                        <a class="link-table" asp-action="Edit" asp-route-id="@item.IdLugar">Editar</a> |
+                        <a class="link-table" asp-action="Details" asp-route-id="@item.IdLugar">Detalle</a> |
+                        <a class="link-table" asp-action="Delete" asp-route-id="@item.IdLugar">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

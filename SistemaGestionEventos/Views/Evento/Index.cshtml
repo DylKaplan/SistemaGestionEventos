@@ -4,75 +4,76 @@
     ViewData["Title"] = "Listado";
 }
 
-<h1>Lista de Eventos</h1>
-
-<p>
-    <a asp-action="Create">Crear Evento</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Descripcion)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lugar)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Equipamiento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Presupuesto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaFin)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Cliente)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estado)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="div-index">
+    <h1>Lista de Eventos</h1>
+    <p>
+        <a class="link-table" asp-action="Create">Crear Evento</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descripcion)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lugar.Nombre)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Equipamiento)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Presupuesto)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaInicio)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FechaFin)
-                </td>
-                <td>
-                    @item.Cliente.Nombre @item.Cliente.Apellido
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Estado)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.IdEvento">Editar</a> |
-                    <a asp-action="Details" asp-route-id="@item.IdEvento">Detalle</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdEvento">Eliminar</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lugar)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Equipamiento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Presupuesto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaInicio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaFin)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Cliente)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Estado)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lugar.Nombre)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Equipamiento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Presupuesto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaInicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaFin)
+                    </td>
+                    <td>
+                        @item.Cliente.Nombre @item.Cliente.Apellido
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Estado)
+                    </td>
+                    <td>
+                        <a class="link-table" asp-action="Edit" asp-route-id="@item.IdEvento">Editar</a> |
+                        <a class="link-table" asp-action="Details" asp-route-id="@item.IdEvento">Detalle</a> |
+                        <a class="link-table" asp-action="Delete" asp-route-id="@item.IdEvento">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

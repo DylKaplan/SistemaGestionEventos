@@ -4,38 +4,39 @@
     ViewData["Title"] = "Listado";
 }
 
-<h1>Lista de Personal en Eventos</h1>
-
-<p>
-    <a asp-action="CreateForEvent">Cargar Personal a un Evento</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Evento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Personal)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="div-index">
+    <h1>Lista de Personal en Eventos</h1>
+    <p>
+        <a class="link-table" asp-action="CreateForEvent">Cargar Personal a un Evento</a>
+    </p>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Evento.Descripcion)
-                </td>
-                <td>
-                    @item.Personal.Nombre @item.Personal.Apellido
-                </td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.IdEventoPersonal">Detalle</a> |
-                    <a asp-action="Delete" asp-route-id="@item.IdEventoPersonal">Eliminar</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Evento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Personal)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Evento.Descripcion)
+                    </td>
+                    <td>
+                        @item.Personal.Nombre @item.Personal.Apellido
+                    </td>
+                    <td>
+                        <a class="link-table" asp-action="Details" asp-route-id="@item.IdEventoPersonal">Detalle</a> |
+                        <a class="link-table" asp-action="Delete" asp-route-id="@item.IdEventoPersonal">Eliminar</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+    </table>
+</div>

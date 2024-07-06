@@ -8,34 +8,42 @@
 
 <div>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Apellido)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Apellido)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Institucion)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Institucion)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
+    <dl class="row details">
+        <div class="item-detalle">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Nombre)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Nombre)
+            </dd>
+        </div>
+        <div class="item-detalle">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Apellido)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Apellido)
+            </dd>
+        </div>
+        <div class="item-detalle">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Institucion)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Institucion)
+            </dd>
+        </div>
+        <div class="item-detalle">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Telefono)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Telefono)
+            </dd>
+        </div>
     </dl>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdCliente">Editar</a> |
-    <a asp-action="Index">Volver</a>
+<div class="btn-detail">
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.IdCliente">Editar</a>
+    <a class="btn btn-secondary" asp-action="Index">Volver</a>
 </div>

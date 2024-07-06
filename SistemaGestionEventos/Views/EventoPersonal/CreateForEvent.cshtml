@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateForEvent">
+        <form id="eventoForm" asp-action="CreateForEvent">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="IdEvento" class="control-label"></label>
@@ -34,7 +34,7 @@
 </div>
 
 <div>
-    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+    <a class="btn btn-secondary" asp-action="Index" class="btn btn-secondary">Volver</a>
 </div>
 
 @section Scripts {

@@ -8,7 +8,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form id="eventoForm" asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdEvento" value="@ViewBag.IdEvento" />
             @if (ViewBag.ErrorMessage != null)
@@ -36,7 +36,7 @@
 </div>
 
 <div>
-    <a id="backButton" asp-action="Index" asp-controller="Evento" class="btn btn-secondary disabled">Volver a la Lista de Eventos</a>
+    <a class="btn btn-secondary" id="backButton" asp-action="Index" asp-controller="Evento" class="btn btn-secondary disabled">Volver a la Lista de Eventos</a>
 </div>
 
 @section Scripts {
