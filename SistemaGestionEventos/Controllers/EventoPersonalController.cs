@@ -71,6 +71,7 @@ namespace SistemaGestionEventos.Controllers
             return View();
         }
 
+
         // POST: EventoPersonal/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -118,6 +119,7 @@ namespace SistemaGestionEventos.Controllers
             ViewBag.DisableBackButton = true;
             return View(eventoPersonal);
         }
+
 
         // GET: EventoPersonal/CreateForEvent
         public IActionResult CreateForEvent()

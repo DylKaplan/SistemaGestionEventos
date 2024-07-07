@@ -49,30 +49,38 @@ namespace SistemaGestionEventos.Controllers
         // GET: Evento/Create
         public IActionResult Create()
         {
-            ViewData["Clientes"] = new SelectList(_context.Clientes, "IdCliente", "Nombre");
+            var clientes = _context.Clientes.Select(c => new {
+                IdCliente = c.IdCliente,
+                NombreCompleto = c.Nombre + " " + c.Apellido
+            }).ToList();
+
+            ViewData["Clientes"] = new SelectList(clientes, "IdCliente", "NombreCompleto");
             ViewData["Lugares"] = new SelectList(_context.Lugares, "IdLugar", "Nombre");
             return View();
         }
 
         // POST: Evento/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("IdEvento,Descripcion,IdLugar,Equipamiento,Presupuesto,FechaInicio,FechaFin,IdCliente,Estado")] Evento evento)
         {
-            /*if (ModelState.IsValid)*/
             if (evento != null)
             {
                 _context.Add(evento);
                 await _context.SaveChangesAsync();
-                //return RedirectToAction(nameof(Index));
                 return RedirectToAction("Create", "EventoPersonal", new { idEvento = evento.IdEvento });
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", evento.IdCliente);
-            ViewData["IdLugar"] = new SelectList(_context.Lugares, "IdLugar", "IdLugar", evento.IdLugar);
+
+            var clientes = _context.Clientes.Select(c => new {
+                IdCliente = c.IdCliente,
+                NombreCompleto = c.Nombre + " " + c.Apellido
+            }).ToList();
+
+            ViewData["Clientes"] = new SelectList(clientes, "IdCliente", "NombreCompleto", evento.IdCliente);
+            ViewData["Lugares"] = new SelectList(_context.Lugares, "IdLugar", "IdLugar", evento.IdLugar);
             return View(evento);
         }
+
 
         // GET: Evento/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -87,14 +95,18 @@ namespace SistemaGestionEventos.Controllers
             {
                 return NotFound();
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", evento.IdCliente);
-            ViewData["IdLugar"] = new SelectList(_context.Lugares, "IdLugar", "IdLugar", evento.IdLugar);
+
+            var clientes = _context.Clientes.Select(c => new {
+                IdCliente = c.IdCliente,
+                NombreCompleto = c.Nombre + " " + c.Apellido
+            }).ToList();
+
+            ViewData["Clientes"] = new SelectList(clientes, "IdCliente", "NombreCompleto", evento.IdCliente);
+            ViewData["Lugares"] = new SelectList(_context.Lugares, "IdLugar", "Nombre", evento.IdLugar);
             return View(evento);
         }
 
         // POST: Evento/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("IdEvento,Descripcion,IdLugar,Equipamiento,Presupuesto,FechaInicio,FechaFin,IdCliente,Estado")] Evento evento)
@@ -104,7 +116,8 @@ namespace SistemaGestionEventos.Controllers
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            /*if (ModelState.IsValid)*/
+            if(evento.IdEvento > -1)
             {
                 try
                 {
@@ -124,10 +137,17 @@ namespace SistemaGestionEventos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["IdCliente"] = new SelectList(_context.Clientes, "IdCliente", "IdCliente", evento.IdCliente);
-            ViewData["IdLugar"] = new SelectList(_context.Lugares, "IdLugar", "IdLugar", evento.IdLugar);
+
+            var clientes = _context.Clientes.Select(c => new {
+                IdCliente = c.IdCliente,
+                NombreCompleto = c.Nombre + " " + c.Apellido
+            }).ToList();
+
+            ViewData["Clientes"] = new SelectList(clientes, "IdCliente", "NombreCompleto", evento.IdCliente);
+            ViewData["Lugares"] = new SelectList(_context.Lugares, "IdLugar", "Nombre", evento.IdLugar);
             return View(evento);
         }
+
 
         // GET: Evento/Delete/5
         public async Task<IActionResult> Delete(int? id)

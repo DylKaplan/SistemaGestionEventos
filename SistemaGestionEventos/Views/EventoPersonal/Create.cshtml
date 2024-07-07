@@ -36,7 +36,7 @@
 </div>
 
 <div>
-    <a class="btn btn-secondary" id="backButton" asp-action="Index" asp-controller="Evento" class="btn btn-secondary disabled">Volver a la Lista de Eventos</a>
+    <a class="btn btn-secondary @((bool)ViewBag.DisableBackButton ? "disabled" : "")" id="backButton" asp-action="Index" asp-controller="Evento">Volver a la Lista de Eventos</a>
 </div>
 
 @section Scripts {
